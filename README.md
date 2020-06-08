@@ -25,11 +25,16 @@ Para este proyecto vamos a extraer un set de datos de la web consumovehicular.cl
 
 Descripcion de algunos campos/informacion de entrada:
 
-rendimientoMixto(consumo) -> variable continua
+rendimientoMixto(consumo) -> variable continua (a predecir)
+
 cilindrada->  variable dicreta de valores multiples
+
 traccion->variable categorica
+
 transmision->variable categorica
+
 norma-> variable categorica
+
 ....
 
 Con la entrada de datos obtenida ya podemos tomar como validos para poder inferir sobre estos, la salida del modelo requerida (consumo).
@@ -42,8 +47,7 @@ Este caso se trata de un aprendizaje supervisado, dado que tenemos etiquetado el
 catalogar como un problema de regresion, especificamente de regresion multiple , esto se da porue se dan "multiples" variables de entrada para realizar la prediccion.
 
 
-Luego de tener los datos del scraping y de la insercion manual, vamos a preparar los datos sobre el archivo 2-Data_transformation.ipynb, en el vamos a eliminar campos inutiles, categorizar algunas columnas, eliminar filas con datos faltantes, 
-
+Luego de tener los datos del scraping y de la insercion manual, vamos a preparar los datos sobre el archivo 2-Data_transformation.ipynb, en el vamos a eliminar campos inutiles, categorizar algunas columnas, eliminar filas con datos faltantes,etc
 
 Continuaremos separando el dataset en conjuntos de entrenamiento, validacion y prueba
 
@@ -54,7 +58,7 @@ Normalizamos los datos
 # 4- Descripción inicial del algoritmo de machine learning o modelo de deep learning a utilizar.
 
 Para la red neuronal a usar definimos primero la ultima capa a utilizar , esta es una capa densa(1) por esperar solo un valor continuo de salida.
-Luego como arquitecturas de las cpas inciales estas seran 2 capas densas de 64 neuronas inicialmente, claro esta que este modelo puede tener alteraciones, mientras se avanza en la investigacion y pruebas del caso.
+Luego como arquitecturas de las capas inciales estas seran 2 capas densas de 64 neuronas inicialmente, claro esta que este modelo puede tener alteraciones, mientras se avanza en la investigacion y pruebas del caso. El archivo notebook a trabajar sera llamado 3_Training_and_evaluate.ipynb.
 
 Como funcion de perdida probare con las tradicionales para tareas de regresion, MSE(mean square error) y MAE(Mean absolute error)
 
@@ -62,3 +66,4 @@ Inicialmente como  Optimizador utilizare RMSprop y correremos unos 1000 epocks p
 
 Luego de ajustar los hiperparametros los mas posibles obtenderemos y modelo final el cual lo pasaremos como archivo a una solucion alojada en python flask para ser llamada por Rest (endpoint) desde una app web plublicada...
 
+El archivo del modelo se guardara con nombre cars_model.h5, este sera el usado en la app web en flask para inferir el consumo de un vehiculo.
